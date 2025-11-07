@@ -12,7 +12,7 @@ const CxConteudo = () => {
                 <button>Clear All</button>
                 <form action="#" method="post">
                     <div>
-                        <CxInp label="Mortgage Amount" simbol={"£"} scale={2}  />
+                        <CxInp label="Mortgage Amount" simbol={"£"} scale={0}  />
                         <CxInp label={"Mortgage Term"} simbol={"years"} scale={0} />
                         <CxInp label={"Interest Rate"} simbol={"%"} scale={2} />
                     </div>

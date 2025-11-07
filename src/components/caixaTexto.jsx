@@ -11,7 +11,7 @@ const CxInp = ({ label, simbol, scale, props }) => {
             <label htmlFor={ID}>{label}</label>
             <IMaskInput
                 id={ID}
-                mask={Number}
+                mask={Number}// mascara
                 radix={"."}// separador decimal
                 thousandsSeparator={","}// separador de milhar
                 scale={scale}// casas decimais maximas
@@ -19,7 +19,6 @@ const CxInp = ({ label, simbol, scale, props }) => {
                 unmask={true}// se true retorna o valor puro sem mascaras
                 {...props}
                 onAccept={(valor) => {// onAccept ==> evento do da lib. funciona igual o onChange
-                    guardado.current = valor 
                     if(props.onChange) props.onChange({ target: { value: valor } })
                  // toda vez que o campo mudar, passa para o parametro 'onChange' um obj
                 } }
