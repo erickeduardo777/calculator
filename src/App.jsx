@@ -5,8 +5,8 @@ function App() {
   
 
   return (
-    <div>
-      <main className="flex flex-col">
+    <div className="min-h-dvh">
+      <main className="bg-purple-800 flex flex-col min-h-dvh">
         <CxConteudo />
         <CxResultado />
       </main>

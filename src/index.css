@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "projeto";
+    src: url("/assets/fonts/PlusJakartaSans-VariableFont_wght.ttf");
+}
+
+@theme {
+    --font-project: "projeto", sans-serif;
+} 
+
+html, body, #root {
+    @apply font-project min-h-dvh w-full
+} 
