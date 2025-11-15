@@ -1,16 +1,20 @@
 import { Calculator } from "lucide-react"
 import CxInp from "./caixaTexto"
 import CxRadio from "./cxRadio"
-import { useState } from "react"
-// import { z } from "zod"
+import { useForm, Controller, FormProvider } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import schema from "../validation/validate"
 
-
-// const schema = z.object({
-//     amount: z.string().nonempty("This field is required"),
-// })
 
 const CxConteudo = () => {
-    const [check, setCheck] = useState(false)
+    const methods = useForm({
+        resolver: zodResolver(schema)
+    })
+
+    const onSubmit = (dados) => {
+        console.log(dados)
+        window.alert("enviado")
+    }
     
 
     return (
@@ -19,23 +23,48 @@ const CxConteudo = () => {
                 <h1 className="text-[#0E2836] text-3xl">Mortgage Calculator</h1>
                 <button className="text-[#56626A] underline">Clear All</button>
             </div>
-            <form action="#" method="post" className="space-y-7">
-                <div className="space-y-8">
-                    <CxInp label={"Mortgage Amount"} simbol={"£"} scale={0} right={false}  />
-                    <CxInp label={"Mortgage Term"} simbol={"years"} scale={0} right={true} />
-                    <CxInp label={"Interest Rate"} simbol={"%"} scale={2} right={true} />
-                </div>
-                <div className="flex flex-col gap-y-4">
-                    <span className="text-[#56626A] text-[18px]">Mortgage Type</span>
-                    <div className="space-y-3">
-                        <CxRadio label={"Repayment"} name={"INPradio"} value={"inp1"} onChange={(e) => setCheck(e.target.value)} checked={check === "inp1"} />
-                        <CxRadio label={"Interest Only"} name={"INPradio"} value={"inp2"} onChange={(e) => setCheck(e.target.value)} checked={check === "inp2"} />
+            <form action="#" method="post" className="space-y-7" onSubmit={methods.handleSubmit(onSubmit)}>
+                <FormProvider {...methods}>
+                    <div className="space-y-8">
+                        <Controller
+                            name="amount"
+                            control={methods.control}
+                            defaultValue=""
+                            render={({ field }) => (
+                                <CxInp label={"Mortgage Amount"} nameINP={"amount"} simbol={"£"} scale={0} right={false} {...field} />
+                            )}
+                        />
+                        <Controller
+                            name="term"
+                            defaultValue=""
+                            control={methods.control}
+                            render={({ field }) => (
+                                <CxInp label={"Mortgage Term"} nameINP={"term"} simbol={"years"} scale={0} right={true} {...field} />
+                            )}
+                        />
+                        <Controller 
+                            name="rate"
+                            defaultValue={""}
+                            control={methods.control}
+                            render={({field}) => (
+                                <CxInp label={"Interest Rate"} nameINP={"rate"} simbol={"%"} scale={2} right={true} {...field} />
+                            )}
+                        />
                     </div>
-                </div>
-                <button type="submit" className="bg-[#BAC528] outline-none text-[#0E2836] font-bold text-[18px] rounded-4xl w-full flex justify-center gap-x-3.5 p-4 hover:bg-[#BAC528]/70 cursor-pointer">
-                    <Calculator strokeWidth={2.5} />
-                    <span>Calculate Repayments</span>
-                </button>
+                    <div className="flex flex-col gap-y-4">
+                        <span className="text-[#56626A] text-[18px]">Mortgage Type</span>
+                        <div className="space-y-3">
+                            <CxRadio label={"Repayment"} value={"repayment"} />
+                            <CxRadio label={"Interest Only"} value={"only"} />
+                        </div>
+                        {methods?.formState?.errors?.radio?.message && <span className="text-red-600">{methods?.formState?.errors?.radio?.message}</span>}
+                    </div>
+                    <button type="submit" className="bg-[#BAC528] outline-none text-[#0E2836] font-bold text-[18px] rounded-4xl w-full flex justify-center gap-x-3.5 p-4 hover:bg-[#BAC528]/70 cursor-pointer">
+                        <Calculator strokeWidth={2.5} />
+                        <span>Calculate Repayments</span>
+                    </button>
+                </FormProvider>
+                
             </form>
         </div>
     )

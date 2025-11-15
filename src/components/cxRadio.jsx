@@ -1,7 +1,12 @@
 import { useId } from "react"
+import { useFormContext } from "react-hook-form"
 
-const CxRadio = ({ name, label, checked, onChange, value }) => {
+const CxRadio = ({ label, value }) => {
     const ID = useId()
+    const { register, watch } = useFormContext()
+    // watch --> observa o valor do input
+    const atualValue = watch("radio")
+    const checked = atualValue === value
 
 
     return (
@@ -9,9 +14,8 @@ const CxRadio = ({ name, label, checked, onChange, value }) => {
             <input 
                 type="radio" 
                 value={value}
-                onChange={onChange}// passa automaticamente como parametro as 'infosDosEventos'
-                name={name} 
                 id={ID} 
+                {...register("radio")}
                 className="scale-[1.3]  accent-[#BAC528] outline-none"
             />
             <span  className="text-[#0E2836] font-bold text-[18px]">{label}</span>
