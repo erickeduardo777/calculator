@@ -3,7 +3,7 @@ import CxInp from "./caixaTexto"
 import CxRadio from "./cxRadio"
 import { useForm, Controller, FormProvider } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import schema from "../validation/validate"
+import schema from "../validation/zod"
 
 
 const CxConteudo = () => {
