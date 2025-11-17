@@ -9,7 +9,7 @@ const ConversorTest = () => {
       // define formato regional pontos e virgulas
       style: "currency", // define a formatação em moeda
       currency: "USD", // define qual a moeda
-    }).format(inputREF.current.value); // valor formatado
+    }).format(inputREF.current.value); // valor que vai ser formatado
     setConvertido(valueConvertido)
   };
 

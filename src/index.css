@@ -10,5 +10,9 @@
 } 
 
 html, body, #root {
-    @apply font-project min-h-dvh w-full
+    @apply font-project min-h-dvh w-full bg-black xl:min-h-screen
 } 
+
+.fundoResult {
+    @apply bg-[#133040] min-h-[50%] flex flex-col items-center justify-center text-center xl:min-w-[50%] xl:min-h-full xl:rounded-r-2xl xl:rounded-bl-[100px] 
+}

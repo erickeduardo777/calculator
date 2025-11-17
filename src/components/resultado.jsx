@@ -1,21 +1,25 @@
-import useStore from "../store/zustand"
+import useStore from "../store/zustand";
+import CxResultPrenchido from "./resultPrenchido";
+import CxResultVazio from "./resultVazio";
 
 const CxResultado = () => {
-    const name = useStore(state => state.name)
+  const parcelaMensal = useStore((state) => state.parcelaMensal); // componente consumidor
+  const totalPago = useStore((state) => state.totalPago);
+ // useStore marca o componente como consumidor do estado --> que sera alterado
 
 
-    return (
-        <div className="bg-[#133040] min-h-[50%] flex flex-col items-center justify-center text-center gap-y-4 py-15">
-            <div>
-                <img src="/calculator/assets/images/illustration-empty.svg" alt="imagem de uma calculadora que indica os dados vazios" />
-            </div>
-            <h1 className="text-white text-2xl">Results shown here</h1>
-            <p className="text-[#7693A5] text-[18px] max-w-[400px]">
-                Complete the form and click "calculate rapayments" to see what your monthly repayments would be.
-            </p>
-            <h1 className="text-white text-4xl">{name}</h1>
-        </div>
-    )
-}
+  return (
+    <>
+      {parcelaMensal === 0 ? (
+        <CxResultVazio />
+      ) : (
+        <CxResultPrenchido
+          parcelaMensal={parcelaMensal}
+          totalPago={totalPago}
+        />
+      )}
+    </>
+  );
+};
 
-export default CxResultado
+export default CxResultado;
